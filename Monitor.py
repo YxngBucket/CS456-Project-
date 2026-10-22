@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 import socket
 import time
 from datetime import datetime
@@ -45,7 +42,7 @@ while True:
         elapsed = time.time() - last_heartbeat
 
         if elapsed > TIMEOUT and not failure_reported:
-            timestamp = datatime.now().strftime("%H:%M:%S")
+            timestamp = datetime.now().strftime("%H:%M:%S")
 
             alert = (
                 f"[{timestamp}] ALERT: Authentication "
@@ -55,7 +52,6 @@ while True:
             print(alert)
 
             with open("incident.log", "a") as log:
-                log.write(alert + "|n")
+                log.write(alert + "\n")
 
             failure_reported = True
->>>>>>> eee08c5a4886d1205e6734644cbab3cc5ea11459

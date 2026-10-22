@@ -1,12 +1,15 @@
 import socket 
 import threading
 import time
+import random
+import os
 
 HOST = "127.0.0.1"
 PORT = 5000
 
 MONITOR_HOST = "127.0.0.1"
 MONITOR_PORT = 6000
+CRASH_PROBABILITY = 0.2
 
 def send_heartbeats():
     heartbeat_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -41,6 +44,9 @@ while True:
     data = conn.recv(1024).decode()
 
     if data:
+        if random.random() < CRASH_PROBABILITY:
+            print("Simulated Crash")
+            os._exit(1)
         print(f"Recieved: {data}")
         conn.sendall(b"Authentication request recieved")
 
